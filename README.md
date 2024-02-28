@@ -1,4 +1,4 @@
-```markdown
+
 # Admin Portal for Company Evaluation and Task Management
 
 ![Overview](<URL_TO_IMAGE_OF_ADMIN_PORTAL>)
