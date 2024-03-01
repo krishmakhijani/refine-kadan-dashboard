@@ -5,7 +5,7 @@ import ProjectCard, { ProjectCardMemo } from '@/components/tasks/kanban/card'
 import KanbanColumn from '@/components/tasks/kanban/column'
 import KanbanItem from '@/components/tasks/kanban/item'
 import { TASKS_QUERY, TASK_STAGES_QUERY } from '@/graphql/queries'
-import { TaskStage } from '@/graphql/schema.types'
+import { Task, TaskStage } from '@/graphql/schema.types'
 import { TasksQuery } from '@/graphql/types'
 import { useList } from '@refinedev/core'
 import { GetFieldsFromList } from '@refinedev/nestjs-query'
@@ -64,7 +64,7 @@ const List = () => {
     const unnasignedStage = tasks.data.filter((task) => task.stageId === null)
     const grouped: TaskStage[] = stages.data.map((stage) => ({
       ...stage,
-      tasks: tasks.data.filter((task) => task.stageId?.toString() === stage.id)
+      tasks: tasks.data.filter((task) => task.stageId?.toString() === stage.id) as Task[]
     }))
 
     return {
@@ -74,9 +74,6 @@ const List = () => {
   },[stages,tasks])
 
 
-  const handleAddCard = (args: {stageId: string}) => {
-
-  }
 
   const isLoading = isLoadingStages || isLoadingTasks
 
@@ -91,7 +88,6 @@ const List = () => {
             id="unnasigned"
             title={"unnasigned"}
             count = {taskStages.unnasignedStage.length || 0}
-            onAddClick={() => handleAddCard({stageId:  'unnasigned'})}
             >
               {taskStages.unnasignedStage.map((task) => (
                 <KanbanItem
@@ -108,7 +104,10 @@ const List = () => {
               ))}
               {!taskStages.unnasignedStage.length && (
                 <KanbanAddCardButton
-                  onClick={() => handleAddCard({stageId: 'unnasigned'})}
+                onClick={() => {
+                  console.log('add card')
+
+                }}
                 />
               )}
             </KanbanColumn>
@@ -119,7 +118,6 @@ const List = () => {
               id={column.id}
               title={column.title}
               count = {column.tasks.length}
-              onAddClick={() => handleAddCard({stageId: column.id})}
               >
                 {!isLoading && column.tasks.map((task) => (
                   <KanbanItem key={task.id} id={task.id} data={task}>
