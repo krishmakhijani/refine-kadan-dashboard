@@ -25,27 +25,20 @@ const ProjectCard = ({id,title,dueDate,users}:ProjectCardProps) => {
 
     const { token } = theme.useToken()
 
-    const edit = () => {
 
-    }
     const dropdownItems = useMemo(() => {
         const dropdownItems: MenuProps['items']=[
             {
                 label:'View Card',
                 key:'1',
                 icon:<EyeOutlined/>,
-                onClick: () => {
-                    edit()
-                }
+
             },
             {
                 danger:true,
                 label:'Delete Card',
                 key:'2',
                 icon:<DeleteOutlined/>,
-                onClick:() => {
-
-                }
             }
         ]
 
@@ -80,7 +73,6 @@ const ProjectCard = ({id,title,dueDate,users}:ProjectCardProps) => {
         <Card
             size="small"
             title={<Text ellipsis={{tooltip:title}}>{title}</Text>}
-            onClick={() => edit()}
             extra={
                 <Dropdown
                 trigger={["click"]}

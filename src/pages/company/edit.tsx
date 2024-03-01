@@ -22,7 +22,7 @@ const EditPage = () => {
                 breadcrumb={false}
                 >
                     <Form {...formProps} layout='vertical'>
-                        <CustomAvatar shape='square' src={avatarUrl}/>
+                        <CustomAvatar shape='square' />
                     </Form>
                 </Edit>
             </Col>
