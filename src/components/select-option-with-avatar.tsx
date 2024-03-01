@@ -3,8 +3,8 @@ import CustomAvatar from './custom-avatar';
 import { Text } from './text';
 
 type Props = {
-    avatarUrl?: string;
     name: string;
+    avatarUrl?: string;
     shape: 'circle' | 'square';
 };
 
